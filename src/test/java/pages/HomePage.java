@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -9,30 +10,40 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
-    private final By loginField = By.xpath("//input[@name = 'email']");
-    private final By passwordField = By.xpath("//input[@name = 'password']");
-    private final By loginButton = By.xpath("//p[contains(text(), 'login')]/../button");
-    private final By searchIcon = By.xpath("//div[text() = 'search']");
+    private final By loginField = By.name("email");
+    private final By passwordField = By.name("password");
+    private final By loginButton = By.xpath("//p[text() = 'login']");
+    private final By loginButtonHomePage = By.xpath("//p[text() = 'Login']/..");
+    private final By searchIcon = By.id("search");
     private final By searchField = By.xpath("//input[@placeholder='WHAT ARE YOU LOOKING FOR?']");
     private final By viewDetailsButton = By.xpath("//div[text() = 'view details']");
     private final By itemSize = By.xpath("//p[text() = 'Size']/../div/button");
     private final By itemSize2 = By.xpath("//p[text() = 'Size']/../div/button[4]");
     private final By itemColor = By.xpath("//p[text() = 'Color']/../div/button");
     private final By addToCardButton = By.xpath("//p[text() = 'add to cart']");
-    private final By cardIcon = By.xpath("//p[text() = '1']");
-    private final By checkoutButton = By.xpath("//p[text() = 'checkout']/..");
-    private final By addPaymentDetailsButton = By.xpath("//p[text() = 'add payment details']/..");
-    private final By placeOrderButton = By.xpath("//p[text() = 'place order']/..");
+    private final By cardIcon = By.id("cart");
+    private final By viewCard = By.xpath("//a[text() = 'view cart']");
+    private final By checkoutButton = By.id("checkout");
+    private final By addPaymentDetailsButton = By.id("addPaymentDetails");
+    private final By placeOrderButton = By.id("placeOrder");
     private final By messageAfterOrderPlacement = By.xpath("//p[text() = 'order summary']/../..");
-    private final By profileIcon = By.xpath("//p[text() = ' PTS']/..");
+    private final By profileIcon = By.id("profile");
     private final By logOutButton = By.xpath("//p[text() = 'Log Out']");
-    private final By catalog = By.xpath("//div[text() = 'shop']");
-    private final By artTab = By.xpath("//div[text() = 'Art']");
+    private final By catalog = By.id("shop");
+    private final By artTab = By.id("art");
 
     public void login(String email, String password){
-        driver.findElement(loginField).sendKeys(email);
-        driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(loginButton).click();
+        try {
+            driver.findElement(loginField).sendKeys(email);
+        } catch (NoSuchElementException e) {
+            driver.findElement(loginButtonHomePage).click();
+            driver.findElement(loginField).sendKeys(email);
+            driver.findElement(passwordField).sendKeys(password);
+            waitUntilPageIsLoaded();
+            clickByJavaScript(driver.findElement(loginButton));
+            waitUntilPageIsLoaded();
+            //driver.findElement(loginButton).click();
+        }
     }
 
     public void clickOnSearchIcon() {
@@ -71,18 +82,19 @@ public class HomePage extends BasePage {
     }
 
     public void moveToCheckout() {
-        driver.findElement(cardIcon).click();
+        driver.findElement(viewCard).click();
         driver.findElement(checkoutButton).click();
+        waitUntilPageIsLoaded();
     }
 
     public void clickOnAddPaymentDetailsButton() {
-        waitUntilPageIsLoaded();
         driver.findElement(addPaymentDetailsButton).click();
+        waitUntilPageIsLoaded();
     }
 
     public void clickOnPlaceOrderButton() {
-        waitUntilPageIsLoaded();
         clickByJavaScript(driver.findElement(placeOrderButton));
+        waitUntilPageIsLoaded();
     }
 
     public boolean getActualMessageAfterOrderPlacement() {
@@ -97,14 +109,14 @@ public class HomePage extends BasePage {
 
     public void openCatalog() {
         waitUntilPageIsLoaded();
-        clickByJavaScript(driver.findElement(catalog));
+        driver.findElement(catalog).click();
     }
 
     public void switchToArtTab() {
         waitUntilPageIsLoaded();
-        clickByJavaScript(driver.findElement(artTab));
         new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//p[text() = 'Art']"))));
+        driver.findElement(artTab).click();
     }
 
 }

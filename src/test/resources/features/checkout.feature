@@ -4,7 +4,7 @@ Feature: Checkout
     Given Open app
 
   Scenario: Registered user credit card checkout with having data for shipping and payment using search
-    Given User login with credentials "roman.romanenko@grinteq.com" "Qwerty12345!"
+    Given User login with credentials "roman.romanenko@grinteq.com" "Zaq12345!"
     When User click on search icon
     And User search "jeans"
     And User open details of item
@@ -18,7 +18,7 @@ Feature: Checkout
     And User log out
 
   Scenario: Registered user credit card checkout with having data for shipping and payment using catalog
-    Given User login with credentials "roman.romanenko@grinteq.com" "Qwerty12345!"
+    Given User login with credentials "roman.romanenko@grinteq.com" "Zaq12345!"
     When User open catalog
     And User switch to Art tab
     And User open details of item

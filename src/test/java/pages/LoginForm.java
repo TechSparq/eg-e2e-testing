@@ -6,11 +6,11 @@ public class LoginForm extends BasePage{
 
     private final By loginButton = By.xpath("//p[text() = 'Login']/..");
     private final By registrationForm = By.xpath("//button[text() = 'Register here']");
-    private final By firstName = By.xpath("//input[@name='firstName']");
-    private final By lastName = By.xpath("//input[@name='lastName']");
-    private final By emailField = By.xpath("//input[@name='email']");
-    private final By passwordField = By.xpath("//input[@name='password']");
-    private final By confirmPasswordField = By.xpath("//input[@name='confirmPassword']");
+    private final By firstName = By.name("firstName");
+    private final By lastName = By.name("//input[@name='lastName']");
+    private final By emailField = By.name("email");
+    private final By passwordField = By.name("password");
+    private final By confirmPasswordField = By.name("confirmPassword");
     private final By termsAndCondition = By.xpath("//input[@type='checkbox']");
     private final By registrationButton = By.xpath("//p[text() = 'register']/..");
     private final By loyaltyPoints = By.xpath("//p[text() = ' PTS']");

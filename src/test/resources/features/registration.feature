@@ -8,7 +8,7 @@ Feature: Registration
     When User fill the data for registration and confirm
     Then User see PTS
     And User open profile menu
-    And User move to profile
+    And User move to My Account
     And User open Save Addresses tab
     And User click on add new button
     And User fill address data and save
