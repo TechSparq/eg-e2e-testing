@@ -37,7 +37,7 @@ public class ProfilePage extends BasePage {
         driver.findElement(addNewButton).click();
     }
 
-    public void fillAddressData() {
+    public void  fillAddressData() {
         driver.findElement(firstName).sendKeys("Roman");
         driver.findElement(lastName).sendKeys("Romanenko");
         driver.findElement(addressLine).sendKeys("4869 Parkview Dr apt H");

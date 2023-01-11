@@ -32,18 +32,8 @@ public class StartPageSteps {
     }
 
     @And("User open details of item")
-    public void userOpenDetailsOfItem() {
+    public void userOpenDetailsOfItem() throws InterruptedException {
         homePage.openDetails();
-    }
-
-    @And("User select a size")
-    public void userSelectASize() {
-        homePage.selectSize();
-    }
-
-    @And("User select a color")
-    public void userSelectAColor() {
-        homePage.selectColor();
     }
 
     @And("User add item to card")
@@ -86,4 +76,18 @@ public class StartPageSteps {
         homePage.switchToArtTab();
     }
 
+    @And("User continue checkout as a guest")
+    public void userContinueCheckoutAsAGuest() {
+        homePage.continueAsGuest();
+    }
+
+    @And("User fill shipping address and email")
+    public void userFillShippingAddressAndEmail() {
+        homePage.fillShippingAddress();
+    }
+
+    @And("User fill payment details")
+    public void userFillPaymentDetails() throws InterruptedException {
+        homePage.fillPaymentDetails();
+    }
 }

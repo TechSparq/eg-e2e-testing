@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class BasePage {
 
@@ -16,7 +15,7 @@ public class BasePage {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://stg.shopwitheg.com/");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     public void clickByJavaScript(WebElement element){
